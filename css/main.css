@@ -1,0 +1,49 @@
+body{
+ font-size: 40px;
+ height: -webkit-fill-available;
+ position: absolute;
+}
+#can{
+    border:2px solid;
+    touch-action: none;
+    width: 1260px;
+    height: 820.5px;
+}
+#controls ul{
+	list-style:none;
+	width:560px;
+	overflow:hidden;
+	margin:auto;
+	padding:20px;
+	display:block;
+}
+
+#controls ul li{
+	cursor:pointer;
+	float:left;
+	width:50px;
+	height:50px;
+	margin:1% 3%;
+	border-radius:100%;	
+}
+
+
+.red{
+	background-color:#f0502a;
+}
+
+.blue{
+	background-color:#236ffa;
+}
+
+.yellow{
+	background-color:#fbc817;
+}
+
+.selected{
+	border:2px solid #fff;
+}
+
+#colorSelect{
+	display:none;
+}
