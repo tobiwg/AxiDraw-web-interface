@@ -1,13 +1,44 @@
-body{
+body, html{
  font-size: 40px;
  height: -webkit-fill-available;
  position: absolute;
+ margin: 0px !important;
+ /*disable all touch gestures*/
+ user-select: none;
+ -moz-user-select: none;
+ -khtml-user-select: none;
+ -webkit-user-select: none;
+ -o-user-select: none;
+ overscroll-behavior: none;
+ touch-action:none;
 }
+/*show error message when device is in landscape*/
+@media only screen and (orientation:landscape) {
+  #turn {
+  display:block;
+  font-size: larger;
+  color: red;
+  }
+}
+ 
+/* CORRECT ORIENTATION - SHOW CONTENT HIDE MESSAGE */
+@media only screen and (orientation:portrait) {
+  #turn { display:none; }
+  
+}
+
 #can{
     border:2px solid;
+    width: 1260px; /*width of axidraw workspace converted to px for ipad pro 11 screen*/
+    height: 820.5px; /*width of axidraw workspace converted to px for ipad pro 11 screen*/
+    
+    /*disable all touch gestures*/
+    user-select: none;
     touch-action: none;
-    width: 1260px;
-    height: 820.5px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 #controls ul{
 	list-style:none;

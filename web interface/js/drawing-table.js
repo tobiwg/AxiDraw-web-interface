@@ -5,69 +5,76 @@
 	var lastEvent;
 	var mouseDown = false;
 	var flag=false;
-
+//init function will be executed when the body of the webpage is loaded
  function init() {
-	canvas = document.getElementById('can');
-	context = canvas.getContext("2d");
-	color = $(".selected").css("background-color");
-	canvas.width = $("#can").width(); //document.width is obsolete
-    canvas.height = $("#can").height(); //document.height is obsolete
-	w = canvas.width;
-    h = canvas.height;
-	canvas.addEventListener('pointerdown', function(e) {
-	lastEvent = e;
-	mouseDown = true;
-	prevX = currX;
-	prevY = currY;  
-	currX = e.clientX - canvas.offsetLeft;
-	currY = e.clientY - canvas.offsetTop;
-	context.moveTo(currX, currY);
-	});
-	canvas.addEventListener('pointermove',function(e){
-		if(mouseDown){
-			prevX = currX;
-			prevY = currY;
-			currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
-			context.beginPath();
-			context.moveTo(prevX, prevY);
-			context.lineTo(currX, currY);
-			context.strokeStyle = color;
-			context.stroke();
-			lastEvent = e;
-			send(currX,currY, prevX,prevY,color,mouseDown);
-			flag=true;
-		}
-	
-	});
-	canvas.addEventListener('pointerup',function(){
-		mouseDown = false;
-		if(flag){
-			send(currX,currY, prevX,prevY,color,mouseDown);
-		}
-	});
-	canvas.addEventListener('pointerout',function(){
-		mouseDown = false;
-		if(flag){
-			send(currX,currY, prevX,prevY,color,mouseDown);
-		}
-	}); 
-	// show border on clicked color
-	$("#controls").on("click", "li", function(){
-		$(this).siblings().removeClass("selected");
-		$(this).addClass("selected");
-		color = $(this).css("background-color");
-		
-	});
+				canvas = document.getElementById('can'); //get the canva element
+				context = canvas.getContext("2d");
+				color = $(".selected").css("background-color"); //get selected color
+				canvas.width = $("#can").width(); //set canva width
+				canvas.height = $("#can").height(); //set canva height
+				w = canvas.width; //store canva width
+				h = canvas.height; //store canv height
+				//listener to the click or pointerdown event
+				canvas.addEventListener('pointerdown', function(e) {
+						lastEvent = e;
+						mouseDown = true; //set mause click to true
+						prevX = currX; //save last position X
+						prevY = currY; //save last position Y
+						currX = e.clientX - canvas.offsetLeft; //get new position X
+						currY = e.clientY - canvas.offsetTop; //get new position in Y
+						context.moveTo(currX, currY); //move to the current position to start drawing
+				});
+				//listener mouse/pen move event
+				canvas.addEventListener('pointermove',function(e){
+					if(mouseDown){ //if we move and we are clicking this will be true 
+						prevX = currX; //save last position X
+						prevY = currY; //save last position Y
+						currX = e.clientX - canvas.offsetLeft; //get new position X
+						currY = e.clientY - canvas.offsetTop; //get new position in Y
+						context.beginPath(); //start the drawing
+						context.moveTo(prevX, prevY); //move to the previus position to start drawing (i think this line is not needed)
+						context.lineTo(currX, currY); //make a line to the current position
+						context.strokeStyle = color; //set color
+						context.stroke();
+						lastEvent = e;
+						send(currX,currY, prevX,prevY,color,mouseDown); //send to mqtt
+						flag=true;
+					}
+				
+				});
+				//listener mouse/pen up event
+				canvas.addEventListener('pointerup',function(){
+					mouseDown = false; //set click/pendown to false
+					if(flag){ //check if it was mooving before the event
+						send(currX,currY, prevX,prevY,color,mouseDown);
+						flag=false;
+					}
+				});
+				//listener mouse/pen out of the canvas event
+				canvas.addEventListener('pointerout',function(){
+					mouseDown = false; //set click/pendown to false
+					if(flag){ //check if it was mooving before the event
+						send(currX,currY, prevX,prevY,color,mouseDown);
+						flag=false;
+					}
+				}); 
+				// show border on clicked color
+				$("#controls").on("click", "li", function(){
+					$(this).siblings().removeClass("selected");
+					$(this).addClass("selected");
+					color = $(this).css("background-color");
+					
+				});
 }
+//function send data over mqtt
 function send(currX, currY, prevX, prevY, color, mouseDown){
-        coor={"width":w,"height":h,"currX": currX,"currY":currY,"prevX":prevX,"prevY":prevY,"color":color, "mouseDown":mouseDown};
-		console.log(coor);
-        client.subscribe("Drawing");
-        message = new Paho.MQTT.Message(JSON.stringify(coor));
-        message.destinationName = "Drawing";
-        client.send(message);
-        console.log("message sent: "+ coor);
+        coor={"width":w,"height":h,"currX": currX,"currY":currY,"prevX":prevX,"prevY":prevY,"color":color, "mouseDown":mouseDown}; //contruct JSON with data
+								console.log(coor); //log to check data
+        client.subscribe("Drawing"); //subscribe to mqtt server
+        message = new Paho.MQTT.Message(JSON.stringify(coor)); //create new mqtt message
+        message.destinationName = "Drawing"; //set destination for the message
+        client.send(message); //send message
+        console.log("message sent: "+ coor); //log to check data
 }
     
         
@@ -87,9 +94,7 @@ function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log("onConnect");
   client.subscribe("Drawing");
-  //message = new Paho.MQTT.Message(JSON.stringify({"width":w,"height":h}));
-  //message.destinationName = "Drawing";
-  //client.send(message);
+  
 }
 
 // called when the client loses its connection

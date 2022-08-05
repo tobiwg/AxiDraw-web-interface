@@ -4,16 +4,19 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
     <script src="js/drawing-table.js" type="text/javascript"></script>
     <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <link rel="stylesheet" href="css/main.css">
     <body onload="init();">
-        <canvas id="can" width="800" height="808" ></canvas>
-        <div id="controls">
+        <div id="turn"> <!--alert if the ipad is in landscape-->
+              Please rotate your device!
+        </div>
+        <canvas id="can" width="800" height="800" ></canvas>
+        <div id="controls"><!-- color selector-->
             <ul>
               <li class="red selected"></li>
               <li class="blue"></li>
               <li class="yellow"></li>
             </ul>
         </div>
-        <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
     </body>
 </html>
