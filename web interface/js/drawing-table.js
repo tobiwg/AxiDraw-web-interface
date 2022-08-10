@@ -65,6 +65,23 @@
 					color = $(this).css("background-color");
 					
 				});
+				
+				$("img").on("click", function(){
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					var img=document.createElement('img');
+					img.src=$(this).attr("src");
+					context.drawImage(img,0,0,canvas.width, canvas.height);
+					drawimg(img);
+				});
+}
+
+function drawimg(img){
+	client.subscribe("Drawing"); //subscribe to mqtt server
+								path ={"path": img.getAttribute('src') ,"width":w,"height":h};
+        message = new Paho.MQTT.Message(JSON.stringify(path)); //create new mqtt message
+        message.destinationName = "Drawing"; //set destination for the message
+        client.send(message); //send message
+        console.log("message sent: "+ path); //log to check data
 }
 //function send data over mqtt
 function send(currX, currY, prevX, prevY, color, mouseDown){
