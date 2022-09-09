@@ -66,11 +66,13 @@
 					
 				});
 				
-				$("#img_preset").on("click", function(){
+				$("img").on("click", function(){
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					var img=document.createElement('img');
 					img.src=$(this).attr("src");
-					context.drawImage(img,0,0,canvas.width, canvas.height);
+					if(img.getAttribute('src') !="/static/img/home.svg"){
+						context.drawImage(img,0,0,canvas.width, canvas.height);
+					}					
 					drawimg(img);
 				});
 }
