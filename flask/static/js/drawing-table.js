@@ -9,22 +9,12 @@
  function init() {
 				canvas = document.getElementById('can2'); //get the canva element
 				context = canvas.getContext("2d");
-			//	canvas_back = document.getElementById('can1'); //get the canva element
-				//ctx = canvas_back.getContext("2d");
 				color = $(".selected").css("background-color"); //get selected color
 				canvas.width = $("#can2").width(); //set canva width
 				canvas.height = $("#can2").height(); //set canva height
 				w = canvas.width; //store canva width
 				h = canvas.height; //store canv height
-				//setInterval(loadBackground, 1500);
-				//listener to the click or pointerdown event
-				var background = new Image();
-				background.src = "img/savedImage.jpg";
 				
-				// Make sure the image is loaded first otherwise nothing will draw.
-				background.onload = function(){
-						//		context.drawImage(background,0,0);   
-				}
 				canvas.addEventListener('pointerdown', function(e) {
 						lastEvent = e;
 						mouseDown = true; //set mause click to true
@@ -76,7 +66,7 @@
 					
 				});
 				
-				$("img").on("click", function(){
+				$(".preset").on("click", function(){
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					var img=document.createElement('img');
 					img.src=$(this).attr("src");
@@ -84,24 +74,10 @@
 					drawimg(img);
 				});
 }
-function loadBackground(){
-	var img=document.createElement('img');
-					img.src="img/savedImage.jpg";
-				///	ctx.drawImage(img,0,0);
-				document.getElementById('can1').src = "img/savedImage.jpg?random="+new Date().getTime();
-					
-				//var background = new Image();
-				//background.src = 
-				//
-				//// Make sure the image is loaded first otherwise nothing will draw.
-				//background.onload = function(){
-				//				///context.drawImage(background,0,0);   
-				//}
-				console.log("bacground updated");
-}
+
 function drawimg(img){
 	client.subscribe("Drawing"); //subscribe to mqtt server
-								path ={"path": img.getAttribute('src') ,"width":w,"height":h};
+								path ={"path": img.getAttribute('src').substring(1) ,"width":w,"height":h};
         message = new Paho.MQTT.Message(JSON.stringify(path)); //create new mqtt message
         message.destinationName = "Drawing"; //set destination for the message
         client.send(message); //send message
