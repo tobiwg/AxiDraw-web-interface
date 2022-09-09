@@ -8,7 +8,13 @@ mousDownTracker = False
 
 def drawimg(path, w, h):
     ad.goto(0, 0)
-    if path != "img/blank.jpg":
+    if path != "/static/img/blank.jpg":
+        if path == "/static/img/home.svg":
+            ad.interactive()
+            ad.disconnect()
+            ad.connect()  # Open serial port to AxiDraw
+            ad.moveto(6.3, 0)  # Pen-up move to (1 inch, 1 inch)
+
         ad.plot_setup(path)
         ad.plot_run()
         ad.interactive()  # Enter interactive context
