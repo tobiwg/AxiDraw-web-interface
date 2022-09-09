@@ -26,8 +26,21 @@ body, html{
   #turn { display:none; }
   
 }
-
-#can{
+#can1{
+ 
+     z-index:0;
+}
+#can2{
+ 
+     z-index:1;
+}
+.canvass{
+ position: relative;
+}
+.can{
+    position: absolute;
+    left: 0;
+    top: 0;
     border:2px solid;
     width: 1260px; /*width of axidraw workspace converted to px for ipad pro 11 screen*/
     height: 804.56px; /*width of axidraw workspace converted to px for ipad pro 11 screen*/

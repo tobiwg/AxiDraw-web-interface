@@ -84,6 +84,7 @@ ad.lineto(6.3, 0)  # Pen-down move, to (2 inch, 1 inch)
 ad.lineto(6.3, 4)
 ad.lineto(0, 4)
 ad.lineto(0, 0)
+ad.moveto(6.3, 0)
 ad.penup()  # lift pen
 
 client.loop_forever()  # Start loop

@@ -10,7 +10,13 @@
         <div id="turn"> <!--alert if the ipad is in landscape-->
               Please rotate your device!
         </div>
-        <canvas id="can" width="800" height="800" ></canvas>
+        
+        <div class="canvass">
+      <!--  <canvas class="can" id="can1" width="800" height="800" style="z-index: 0"></canvas>-->
+        <canvas class="can" id="can2" width="800" height="800" style="z-index: 1" ></canvas>
+        <img id="can1" class="can" src="img/savedImage.jpg">
+        </div>
+        <div class="control" style="position: relative;z-index: 1; top: 900">
         <div id="controls"><!-- color selector-->
             <ul>
               <li class="red selected"></li>
@@ -24,5 +30,6 @@
         <img id="img_preset" src="img/men-drawing.svg">
         <img id="img_preset" src="img/horse-drawing.svg">
         <img id="img_preset" src="img/blank.jpg">
+        </div>
     </body>
 </html>

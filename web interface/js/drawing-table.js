@@ -1,4 +1,4 @@
-	var canvas, context, color, prevX = 0,
+	var canvas, context, color, prevX = 0, canvas_back, ctx
         currX = 0,
         prevY = 0,
         currY = 0;
@@ -7,14 +7,24 @@
 	var flag=false;
 //init function will be executed when the body of the webpage is loaded
  function init() {
-				canvas = document.getElementById('can'); //get the canva element
+				canvas = document.getElementById('can2'); //get the canva element
 				context = canvas.getContext("2d");
+			//	canvas_back = document.getElementById('can1'); //get the canva element
+				//ctx = canvas_back.getContext("2d");
 				color = $(".selected").css("background-color"); //get selected color
-				canvas.width = $("#can").width(); //set canva width
-				canvas.height = $("#can").height(); //set canva height
+				canvas.width = $("#can2").width(); //set canva width
+				canvas.height = $("#can2").height(); //set canva height
 				w = canvas.width; //store canva width
 				h = canvas.height; //store canv height
+				setInterval(loadBackground, 1500);
 				//listener to the click or pointerdown event
+				var background = new Image();
+				background.src = "img/savedImage.jpg";
+				
+				// Make sure the image is loaded first otherwise nothing will draw.
+				background.onload = function(){
+						//		context.drawImage(background,0,0);   
+				}
 				canvas.addEventListener('pointerdown', function(e) {
 						lastEvent = e;
 						mouseDown = true; //set mause click to true
@@ -74,7 +84,21 @@
 					drawimg(img);
 				});
 }
-
+function loadBackground(){
+	var img=document.createElement('img');
+					img.src="img/savedImage.jpg";
+				///	ctx.drawImage(img,0,0);
+				document.getElementById('can1').src = "img/savedImage.jpg?random="+new Date().getTime();
+					
+				//var background = new Image();
+				//background.src = 
+				//
+				//// Make sure the image is loaded first otherwise nothing will draw.
+				//background.onload = function(){
+				//				///context.drawImage(background,0,0);   
+				//}
+				console.log("bacground updated");
+}
 function drawimg(img){
 	client.subscribe("Drawing"); //subscribe to mqtt server
 								path ={"path": img.getAttribute('src') ,"width":w,"height":h};
