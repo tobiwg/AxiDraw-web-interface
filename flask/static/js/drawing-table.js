@@ -66,7 +66,7 @@
 					
 				});
 				
-				$(".preset").on("click", function(){
+				$("#img_preset").on("click", function(){
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					var img=document.createElement('img');
 					img.src=$(this).attr("src");

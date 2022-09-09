@@ -8,8 +8,8 @@ mousDownTracker = False
 
 def drawimg(path, w, h):
     ad.goto(0, 0)
-    if path != "/static/img/blank.jpg":
-        if path == "/static/img/home.svg":
+    if path != "static/img/blank.jpg":
+        if path == "static/img/home.svg":
             ad.interactive()
             ad.disconnect()
             ad.connect()  # Open serial port to AxiDraw
