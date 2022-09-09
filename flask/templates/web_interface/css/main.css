@@ -1,0 +1,101 @@
+body, html{
+ font-size: 40px;
+ height: -webkit-fill-available;
+ position: absolute;
+ margin: 0px !important;
+ /*disable all touch gestures*/
+ user-select: none;
+ -moz-user-select: none;
+ -khtml-user-select: none;
+ -webkit-user-select: none;
+ -o-user-select: none;
+ overscroll-behavior: none;
+ touch-action:none;
+}
+/*show error message when device is in landscape*/
+@media only screen and (orientation:landscape) {
+  #turn {
+  display:block;
+  font-size: larger;
+  color: red;
+  }
+}
+ 
+/* CORRECT ORIENTATION - SHOW CONTENT HIDE MESSAGE */
+@media only screen and (orientation:portrait) {
+  #turn { display:none; }
+  
+}
+#can1{
+ 
+     z-index:0;
+}
+#can2{
+ 
+     z-index:1;
+}
+.canvass{
+ position: relative;
+}
+.can{
+    position: absolute;
+    left: 0;
+    top: 0;
+    border:2px solid;
+    width: 1260px; /*width of axidraw workspace converted to px for ipad pro 11 screen*/
+    height: 804.56px; /*width of axidraw workspace converted to px for ipad pro 11 screen*/
+    
+    /*disable all touch gestures*/
+    user-select: none;
+    touch-action: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+#img_preset{
+ float:left;
+	width:250px;
+	height:250px;
+	margin:1% 3%;
+	border-radius:30%;
+ border: 2px solid;
+}
+#controls ul{
+	list-style:none;
+	width:560px;
+	overflow:hidden;
+	margin:auto;
+	padding:20px;
+	display:block;
+}
+
+#controls ul li{
+	cursor:pointer;
+	float:left;
+	width:50px;
+	height:50px;
+	margin:1% 3%;
+	border-radius:100%;	
+}
+
+
+.red{
+	background-color:#f0502a;
+}
+
+.blue{
+	background-color:#236ffa;
+}
+
+.yellow{
+	background-color:#fbc817;
+}
+
+.selected{
+	border:2px solid #fff;
+}
+
+#colorSelect{
+	display:none;
+}

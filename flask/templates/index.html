@@ -1,0 +1,35 @@
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/drawing-table.js') }}" type="text/javascript"></script>
+    <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <body onload="init();">
+        <div id="turn"> <!--alert if the ipad is in landscape-->
+              Please rotate your device!
+        </div>
+        
+        <div class="canvass">
+      <!--  <canvas class="can" id="can1" width="800" height="800" style="z-index: 0"></canvas>-->
+        <canvas class="can" id="can2" width="800" height="800" style="z-index: 1" ></canvas>
+        <img id="can1" class="can" src="{{ url_for('video_feed') }}">
+        </div>
+        <div class="control" style="position: relative;z-index: 1; top: 900">
+        <div id="controls"><!-- color selector-->
+            <ul>
+              <li class="red selected"></li>
+              <li class="blue"></li>
+              <li class="yellow"></li>
+            </ul>
+        </div>
+        <!--<img id="img_preset" src="img/girl-drawing.jpg">-->
+        <img id="img_preset" src="{{ url_for('static', filename='img/Animals-drawing.svg') }}">
+       <!-- <img id="img_preset" src="img/draw-friend.jpg">-->
+        <img id="img_preset" src="{{ url_for('static', filename='img/men-drawing.svg') }}">
+        <img id="img_preset" src="{{ url_for('static', filename='img/horse-drawing.svg') }}">
+        <img id="img_preset" src="{{ url_for('static', filename='img/blank.jpg') }}">
+        </div>
+    </body>
+</html>
