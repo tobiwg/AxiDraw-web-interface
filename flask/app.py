@@ -5,7 +5,7 @@ import socket
 import numpy as np
 import cv2 as cv
 port = 5501
-cap = cv.VideoCapture(1)
+cap = cv.VideoCapture(-1, cv.CAP_V4L)
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -15,6 +15,7 @@ def gen_frames():
     first = True
     while True:
         success, frame = cap.read()  # read the camera frame
+        frame = cv.rotate(frame, cv.ROTATE_90_CLOCKWISE)
         if not success:
             break
         else:
@@ -43,10 +44,13 @@ def index():
     #return "Hello! This is the home page <h1>HELLO</h1>"
     return render_template('index.html')
 
-#app.run('10.56.6.232', port=port, debug=True)
+#app.run('10.56.129.2', port=port, debug=False)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+
 if __name__ == '__main__':
  	#The way of getting the ip address is dumb but works https://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
-	print(f"access at http://{[ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith('127.')][0]}:{port}")
+	print(f"access at http://{s.getsockname()[0]}:{port}")
 	socketio.run(app, host='0.0.0.0', debug=True, port=port)
 
 
