@@ -35,6 +35,7 @@
 						context.moveTo(prevX, prevY); //move to the previus position to start drawing (i think this line is not needed)
 						context.lineTo(currX, currY); //make a line to the current position
 						context.strokeStyle = color; //set color
+						context.lineWidth = 8;
 						context.stroke();
 						lastEvent = e;
 						send(currX,currY, prevX,prevY,color,mouseDown); //send to mqtt
