@@ -13,14 +13,14 @@ def drawimg(path, w, h):
             ad.interactive()
             ad.disconnect()
             ad.connect()  # Open serial port to AxiDraw
-            ad.moveto(6.3, 0)  # Pen-up move to (1 inch, 1 inch)
-
-        ad.plot_setup(path)
-        ad.plot_run()
-        ad.interactive()  # Enter interactive context
-        ad.disconnect()
-        ad.connect()  # Open serial port to AxiDraw
-        ad.goto(0, 0)  # Pen-up move to (1 inch, 1 inch)
+            ad.goto(6.3, 0)  # Pen-up move to (1 inch, 1 inch)
+        else:
+            ad.plot_setup(path)
+            ad.plot_run()
+            ad.interactive()  # Enter interactive context
+            ad.disconnect()
+            ad.connect()  # Open serial port to AxiDraw
+            ad.goto(0, 0)  # Pen-up move to (1 inch, 1 inch)
 
 
 def draw(currX, currY, prevX, prevY, width, height, color, mouseDown):
@@ -90,7 +90,6 @@ ad.lineto(6.3, 0)  # Pen-down move, to (2 inch, 1 inch)
 ad.lineto(6.3, 4)
 ad.lineto(0, 4)
 ad.lineto(0, 0)
-ad.moveto(6.3, 0)
 ad.penup()  # lift pen
-
+ad.goto(6.3, 0)
 client.loop_forever()  # Start loop
