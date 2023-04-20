@@ -9,7 +9,7 @@ here are the steps to run this code:
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 ```
-check the ip of the raspoberry and change the ip in app.py line 67 for the ip of the raspberry
+check the ip of the raspberry and change the ip in app.py line 67 for the ip of the raspberry
 then run 
 ```
 python3 app.py
